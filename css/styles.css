@@ -1,0 +1,379 @@
+/*variables globales*/
+:root {
+  --negro: #0c0c0c;
+  --negro-claro: #1a1919;
+  --rojo: #d82522;
+  --rojo_pulsar: #bf201e;
+  --amarillo: #fbff19;
+  --blanco: #ffffff;
+  --gris: #bdbbbb;
+}
+@font-face{
+  font-family: "fuente-top";
+  src: url("../fonts/MartianMonoSemiexpandedBold.ttf") format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "fuente-top";
+  src: url("../fonts/MartianMonoCondensedMedium.ttf") format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/*generales*/
+html {
+  font-size: 62.5%;
+  box-sizing: border-box;
+}
+
+body {
+  font-size: 16px;
+  font-family: 'fuente-top', serif;
+  font-weight: 400;
+  font-style: normal;
+
+}
+body.no-scroll{
+  overflow: hidden;
+}
+
+/*box-model*/
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+/*titulos*/
+h1 {
+  font-size: 4.5rem;
+  margin: 3rem 0rem .5rem 0rem; 
+}
+h2 {
+  font-size: 3.2rem;
+}
+h1,
+h2 {
+  text-align: center;
+  color: var(--rojo);
+}
+
+.encabezado{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.encabezado img{
+  fill: blue;
+}
+a{
+  text-decoration: none;
+}
+
+@media (min-width: 768px) { 
+   .encabezado{
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+/*navegador*/
+.navegador_fondo {
+  width: 100%;
+}
+
+.navegador {
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-evenly;
+  padding: 1.5rem;
+} 
+@media (min-width: 768px) {
+  .navegador {
+    padding: .5rem;
+  }
+}
+
+.navegador a {
+  text-align: center;
+  margin: 0;
+  color: var(--blanco);
+  text-transform: uppercase;
+}
+
+@media (min-width: 768px) {
+  .navegador a {
+    margin: 1rem;
+    padding: 0;
+    font-size: 2rem;
+  }
+   
+}
+.navegador a:hover, .activo {
+  text-decoration: underline;
+}
+
+.navegacion_fondo--fijo {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: var(--negro);
+  z-index: 10;
+  
+}
+
+/*main-hero-section*/
+.hero-section{
+/* 👇 AQUÍ AÑADIMOS LA TERCERA CAPA 👇 */
+  background:
+    /* CAPA 1: Viñeta SUPERIOR (muy oscura en el borde) */
+    linear-gradient(to bottom, rgba(0, 0, 0, .85) 0%, transparent 30%),
+    
+    /* CAPA 2: Viñeta INFERIOR (muy oscura en el borde) */
+    linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, transparent 30%),
+    
+    /* CAPA 3 (NUEVA): Overlay BASE (oscurece TODA la imagen de fondo) */
+    linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, .95)),
+
+    url('../img/banner.webp') no-repeat center bottom;
+
+  background-size: cover;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.hero-section h2 {
+  text-transform: uppercase;
+}
+
+.hero-section p {
+  color: var(--gris);
+  margin: 0 3rem;
+  text-align: center;
+  line-height: 1.5;
+  font-weight: normal;
+  margin-bottom: 1rem;
+}
+
+.historia{
+  margin: 1rem;
+}
+
+.degradado{
+  background-image: linear-gradient(to bottom, #000000 0%, #1a1919 100%);
+}
+
+/*galeria*/
+.titulo_seccion {
+  margin: 0;
+  padding-top: 4rem;
+  text-transform: uppercase;
+  font-weight: normal;
+}
+
+.parrafo_seccion {
+  text-align: center;
+  width: 90%;
+  color: var(--gris);
+  margin:3rem auto;
+}
+
+.galeria-imagenes img{
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1/1;
+  display: block;
+}
+
+.galeria-imagenes{
+  width: 90%;
+  margin: 5rem auto 0 auto;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  row-gap: 2rem;
+}
+@media (min-width: 768px) {
+  .galeria-imagenes{
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 2rem;
+
+  }
+}
+
+/*modal*/
+.modal{
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(rgba(0, 0, 0, .70));
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  opacity: 0; 
+  visibility: hidden; 
+  transition: opacity 0.3s ease, visibility 0.3s ease; 
+}
+.modal.modal--visible {
+  opacity: 1; 
+  visibility: visible;
+}
+.modal img{
+  max-width: 50rem;
+  height: auto;
+  transform: scale(0.9); /* Empieza un 10% más pequeña */
+  transition: transform 0.3s ease;
+}
+.modal.modal--visible img {
+  transform: scale(1);
+}
+.modal__cerrar {
+  position: absolute;
+  top: 0;
+  right: 3rem;
+  color: var(--blanco);
+  font-size: 4rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/*merch */
+.merch__imagenes{
+  width: 70%;
+  margin: auto;
+}
+@media (min-width: 768px) {
+  .merch__imagenes{
+    width: 90%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 2rem;
+  }
+   
+}
+
+.merch__producto{
+  margin: 4rem auto;
+}
+@media (min-width: 768px) {
+  .merch__producto{
+    margin: 0;
+  }
+   
+}
+
+.marco{
+  overflow: hidden;;
+}
+.merch__enlace img{
+  width: 100%;  
+  display: block;
+  background-color: var(--negro-claro) ;
+  transform: scale(1);
+  transition: transform 0.3s ease-in-out;
+  height: auto;
+  aspect-ratio: 1/1;
+}
+.merch__producto a:hover img{
+  transform: scale(1.10);
+}
+
+.merch__producto p{
+  display: inline-block;
+  margin: .8rem;
+  text-align: left;
+  font-size: 2rem;
+  text-transform: uppercase;
+  
+}
+.parrafo_seccion.p-block{
+  display: block;
+}
+
+/*musica*/
+.albumes{
+  width: 90%;
+  margin: auto;
+  padding-bottom: 3rem;
+}
+@media (min-width: 768px) { 
+   .albumes{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 2rem;
+    row-gap: 1rem;
+   }
+}
+.albumes img{
+  width: 100%;
+  height: auto;
+  transform: scale(1);
+  transition: transform 0.5s ease-in-out;
+}
+.albumes a:hover img{
+  transform: scale(1.08);
+}
+.albumes p{
+  margin: 0;
+  margin: 1rem auto 3rem auto;
+  width: 100%;
+  font-size: 2rem;
+  text-transform: uppercase;
+}
+
+/*video*/
+.informacion{
+  position: relative;
+  overflow: hidden;
+
+  min-height: 100vh; 
+}
+.overlay{
+   /* 'inset' y 'position' ya no son necesarios */
+  position: absolute;
+  background: linear-gradient(rgba(0, 0, 0, .80) );
+  inset: 0; 
+  display: flex; 
+}
+
+/* El contenedor del texto, que será centrado por el grid del padre */
+.contenedor {
+  margin: auto;
+}
+
+.informacion video{
+  /* Lo posicionamos absolutamente para que llene el contenedor */
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  
+  object-fit: cover;
+  z-index: -1;
+}
+@media (min-width: 768px) { 
+  .informacion video{
+    width: 100%;
+  }
+}
+
+/*footer*/
+.footer {
+  background-color: var(--negro);
+}
+
+.footer__derechos {
+  font-size: 1.5rem;
+  color: var(--gris);
+  font-style: normal;
+  text-align: center;
+  margin: 0;
+  padding: 1rem;
+}
